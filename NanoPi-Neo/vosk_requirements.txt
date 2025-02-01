@@ -1,0 +1,1 @@
+sudo pip3 install wheel setuptools datetime clipboard psutil pyaudio pyjokes pyttsx3 requests python-vlc wikipedia vosk asyncio ttastromech adafruit-circuitpython-pca9685 pyserial pyaudio HC-05-ConfigTool Adafruit_BBIO

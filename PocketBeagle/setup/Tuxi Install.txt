@@ -1,0 +1,22 @@
+Tuxi, Pup, recode and JQ install:
+
+pup:
+copy pup file to ~
+$ sudo mv pup /usr/local/bin
+
+$ ls -la /usr/local/bin
+$ sudo chmod +x /usr/local/bin/pup
+
+recode & JQ:
+
+sudo apt-get install recode jq
+
+Tuxi:
+
+$ sudo curl -sL "https://raw.githubusercontent.com/Bugswriter/tuxi/main/tuxi" -o /usr/local/bin/tuxi
+
+$ sudo chmod +x /usr/local/bin/tuxi
+
+$ git clone https://github.com/Bugswriter/tuxi.git && cd tuxi/
+
+$ sudo make install

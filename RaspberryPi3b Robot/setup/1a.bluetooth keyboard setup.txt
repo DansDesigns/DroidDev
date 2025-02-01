@@ -1,0 +1,16 @@
+
+
+sudo bluetoothctl
+
+agent on
+
+scan on
+
+devices
+
+pair EC:2E:45:D7:F9:CE
+connect EC:2E:45:D7:F9:CE
+trust EC:2E:45:D7:F9:CE
+
+
+EC:2E:45:D7:F9:CE = Bluetooth 3.0 Keyboard

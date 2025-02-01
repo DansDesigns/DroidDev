@@ -1,0 +1,14 @@
+git clone https://github.com/birdtechstep/fbtft.git 
+
+
+1.8" ST7735:
+
+sudo modprobe fbtft_device name=sainsmart18 busnum=0 rotate=0 gpios=reset:$RESET,dc:$DC cs=0
+
+3.5" ILI9488:
+
+sudo modprobe fbtft_device custom name=fb_ili9488 busnum=0 rotate=0 gpios=reset:57,dc:58 cs=5
+
+list fbtft drivers:
+
+sudo modprobe fbtft_device name=list; dmesg | tail -30

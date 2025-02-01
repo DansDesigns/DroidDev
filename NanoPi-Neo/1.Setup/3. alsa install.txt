@@ -1,0 +1,30 @@
+
+
+
+sudo apt-get install libasound2 alsa-utils
+
+enable SPDIF in armbian-config,
+
+
+sudo nano /etc/asound.conf
+
+add:
+
+
+pcm.!default {
+    type hw
+    card 0
+    device 0
+}
+ 
+ctl.!default {
+    type hw
+    card 0
+}
+
+
+
+Reboot
+
+aplay -l
+

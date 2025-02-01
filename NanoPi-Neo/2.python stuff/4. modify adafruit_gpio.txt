@@ -1,0 +1,8 @@
+to use MPR121 and other Adafruit_GPIO sensor libraries, 
+
+change ../venv/site-packages/adafruit-gpio/I2C.py:
+
+line 55
+
+comment out, add new line:
+return 0

@@ -1,0 +1,1 @@
+clear && python3 pygame_test.py --interface spi --display ssd1351 --spi-bus-speed 4500000 --spi-device=0 --spi-port=1 --gpio OPi.GPIO --gpio-reset=12 --gpio-data-command=18 --gpio OPi.GPIO

@@ -1,0 +1,14 @@
+
+sudo apt-get install python-dev-is-python3
+
+git clone https://github.com/friendlyarm/RPi.GPIO_NP.git 
+
+
+or copy from SBC Folder to ~ via winSCP
+
+
+cd RPi.GPIO_NP
+
+python3 setup.py install                 
+
+sudo python3 setup.py install

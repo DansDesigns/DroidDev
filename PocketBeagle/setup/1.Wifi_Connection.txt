@@ -1,0 +1,26 @@
+192.168.7.2 - default USB address for Putty
+
+Debian 11:
+<Default-UserName> debian
+<Default-PASSWORD> temppwd
+
+sudo networkctl
+
+
+sudo nano /etc/wpa_supplicant/wpa_supplicant-wlan0.conf
+
+sudo wpa_cli -i wlan0 reconfigure
+
+
+wpa_cli -i wlan0
+scan
+scan results
+add_network
+1
+set_network 1 ssid "Workshop-Wifi"
+set_network 1 psk "Tintin10"
+enable_network 1
+
+> CTRL-EVENT-CONNECTED = SUCCESS
+
+quit

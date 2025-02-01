@@ -1,0 +1,37 @@
+I use PIN 18 (updated by Dan to pin PG06(linux gpio198)) I pot a pullup resistor (10kOhm) to PIN 17 - 3,3V.
+
+After this, i configure the PIN18.
+
+echo 198 > /sys/class/gpio/export
+echo "in" > /sys/class/gpio/gpio198/direction
+
+Now i can check the value
+
+
+ 
+
+cat /sys/class/gpio/gpio198/value
+
+The answer should be 1.
+
+If now the PIN18 is shorted to PIN 20 (GND), the answer is 0.
+
+A little script does it for me:
+
+sudo nano ~/poweroff.sh
+
+
+#!/bin/sh
+BUTTON=200 # shutdown button
+
+echo "$BUTTON" > /sys/class/gpio/export
+echo "in" > /sys/class/gpio/gpio$BUTTON/direction
+
+while true ; do
+  data=`cat /sys/class/gpio/gpio$BUTTON/value`
+  if [ "$data" -eq "0" ] ; then
+    shutdown -h now
+  else
+    cnt=0
+fi
+  done

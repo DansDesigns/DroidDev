@@ -1,0 +1,40 @@
+VCC----------3.3V------17
+GND--------GND------20
+CS------------24--------24 (PC3)
+RESET------12---------12 (PA6)
+DC/RS------18---------18 (PG9)
+MOSI-------19---------19 (PC0)
+SCK---------23---------23 (PC2)
+
+
+
+copy ssd1351-spi-overlay-h3.dts file to home
+
+sudo cp ~/ssd1351-spi-overlay-h3.dts /boot/overlay-user/
+
+cd /boot/overlay-user
+
+sudo armbian-add-overlay ssd1351-spi-overlay-h3.dts
+
+
+sudo nano /boot/armbianEnv.txt
+
+make it so:
+
+
+verbosity=1
+bootlogo=false
+console=serial
+disp_mode=1920x1080p60
+overlay_prefix=sun8i-h3
+overlays=i2c0 spi-add-cs1 spi-jedec-nor spi-spidev usbhost1 usbhost2
+rootdev=UUID=b79bfb19-a92f-4579-b002-39239b0b8f16
+rootfstype=ext4
+user_overlays=ssd1351-spi-overlay-h3
+param_spidev_spi_bus=0
+param_spidev_max_freq=4500000
+usbstoragequirks=0x2537:0x1066:u,0x2537:0x1068:u
+
+Reboot and test with:
+
+sudo modprobe fb_ssd1351

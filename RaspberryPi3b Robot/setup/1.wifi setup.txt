@@ -1,0 +1,8 @@
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf.
+network={ ssid="The SSID of your network (eg. Network name)" psk="Your Wifi Password" }
+sudo ifdown wlan0.
+sudo ifup wlan0.
+ifconfig.
+sudo nano /etc/dhcpcd.conf.
+sudo reboot.
+hostname -I.

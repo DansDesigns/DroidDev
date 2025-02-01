@@ -1,0 +1,27 @@
+
+Using a3144 Hall-Effect Magnet sensor (LOW when magnet away, 5v when magnet near),
+PG6 powerbutton/wake
+PG7 sleep (controlled by pygame & os module)
+
+
+suspend to RAM and wakeup instruction: (add this to pygame GUI as hidden function)
+
+echo mem > /sys/power/state
+
+(test with 30 second timer:)
+
+echo +30 > /sys/class/rtc/rtc0/wakealarm
+
+
+(then, press "power key" to wake-up)
+
+
+copy power-button-overlay-h3.dts file to home
+
+sudo cp ~/power-button-overlay-h3.dts /boot/overlay-user/
+
+cd /boot/overlay-user
+
+sudo armbian-add-overlay power-button-overlay-h3.dts
+
+

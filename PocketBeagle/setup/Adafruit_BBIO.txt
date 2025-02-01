@@ -1,0 +1,14 @@
+sudo apt-get update
+sudo apt-get install build-essential python3-dev python3-pip -y
+sudo pip3 install Adafruit_BBIO
+
+
+
+Pin Setup:
+Debian10:
+
+GPIO.setup("P8_7", OUT )
+
+Debian11:
+
+GPIO.setup("P8_07", OUT )

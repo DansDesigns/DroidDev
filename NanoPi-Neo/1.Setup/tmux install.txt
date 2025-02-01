@@ -1,0 +1,29 @@
+
+
+sudo apt-get install tmux
+
+
+git clone https://github.com/tmux-plugins/tmux-resurrect.git ~/.tmux_plugins/
+
+git clone https://github.com/tmux-plugins/tmux-continuum.git ~/.tmux_plugins/
+
+
+sudo nano ~/.tmux.conf
+
+paste:
+
+
+# split panes using | and -
+bind | split-window -h
+bind - split-window -v
+unbind '"'
+unbind %
+
+# Enable mouse mode (tmux 2.1 and above)
+set -g mouse on
+
+
+run-shell ~/.tmux_plugins/tmux-resurrect/resurrect.tmux
+run-shell ~/.tmux_plugins/tmux-continuum/continuum.tmux
+
+

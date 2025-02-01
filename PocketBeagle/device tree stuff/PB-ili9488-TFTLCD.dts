@@ -1,0 +1,117 @@
+/*
+*Copyright <2018> <Logan Baldridge>
+* Modified by Daniel Miles for ili9488
+*
+*Permission is hereby granted, free of charge, to any person obtaining a copy of 
+*this software and associated documentation files (the "Software"), to deal in 
+*the Software without restriction, including without limitation the rights to 
+*use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies 
+*of the Software, and to permit persons to whom the Software is furnished to do 
+*so, subject to the following conditions:
+*
+*The above copyright notice and this permission notice shall be included in 
+*all copies or substantial portions of the Software.
+*
+*THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+*IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+*FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+*AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+*LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+*OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+*IN THE SOFTWARE.
+*
+*/
+
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/pinctrl/am33xx.h>
+#include <dt-bindings/interrupt-controller/irq.h>
+
+/*
+ * Pin assignments
+ *
+ * Module      Connector
+ * LITE    <-  SYS_VOUT 
+ * MISO    ->  P1.10  /* spi: spi0_d0   ( 3 - SPI0_D0  )
+ * SCK     <-  P1.8   /* spi: spi0_sclk ( 2 - SPI0_SCLK)
+ * MOSI    <-  P1.12  /* spi: spi0_d1   ( 4 - SPI0_D1  )
+ * TFT_CS  <-  P1.6   /* spi: spi0_cs0  ( 5 - SPI0_CS0 )
+ * CARD_CS <-  NC
+ * D/C     <-  P2.04  /* lcd: GPIO47    (47 - GPMC_AD15)
+ * RESET   <-  P2.06  /* lcd: GPIO64    (64 - GPMC_CSn3)
+ *
+ */
+
+
+/*
+ * Free up the pins used by the cape from the pinmux helpers.
+*/ 
+
+/ {
+
+	fragment@0 {
+		target = <&ocp>; 
+		__overlay__ {
+			P1_06_pinmux { status = "disabled"; }; /* LCD - CS */
+			P1_08_pinmux { status = "disabled"; }; /* LCD - SCLK */
+			P1_10_pinmux { status = "disabled"; }; /* LCD - MISO */
+			P1_12_pinmux { status = "disabled"; }; /* LCD - MOSI */
+			P2_01_pinmux { status = "disabled"; }; /* LCD - LED */
+			P2_04_pinmux { status = "disabled"; }; /* LCD - DC */
+			P2_06_pinmux { status = "disabled"; }; /* LCD - RST */
+		};
+	};
+
+/*
+ * Free up the gpios used by the cape-universal gpio helpers.
+ */
+	fragment@1 {
+		target = <&ocp>;
+		__overlay__ {
+			cape-universal { status = "disabled"; };
+		};
+	};
+
+/*
+ * Free up the SPI port used by the cape and reallocate it for the LCD.
+ */
+	fragment@2 {
+		target = <&spi0>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "okay";
+			channel@0 {
+				status = "disabled";
+			};
+			channel@1 {
+				status = "disabled";
+			};
+			adafruit18: adafruit18@0{
+				compatible = "fb_ili9488";
+				pinctrl-names = "default";
+				pinctrl-0 = <
+					&P1_06_spi_cs_pin   /* CS */
+					&P1_08_spi_sclk_pin /* SCLK */
+					&P1_10_spi_pin      /* MISO */
+					&P1_12_spi_pin      /* MOSI */
+					&P2_06_gpio_pin     /* RST */
+					&P2_04_gpio_pin     /* DC */
+					&P2_01_gpio_pin     /* LED */
+				>;
+				reg = <0>;
+				buswidth = <8>;
+				reset-gpios = <&gpio2 0 0>;
+				dc-gpios = <&gpio1 15 0>;
+				led-gpios = <&gpio1 18 1>;
+				debug = <1>;
+				spi-max-frequency = <32000000>;
+				rotate = <0>;
+				bgr;
+				fps = <30>;
+			};
+		}; 
+	};
+};

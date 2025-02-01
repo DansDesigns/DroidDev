@@ -1,0 +1,41 @@
+
+REPLACED BY DTOVERLAY
+
+
+Panel--- Panel------GPIO-------NanoPI pin
+Pin------Label------Pin nb-----number
+1--------VCC--------3.3V-------17
+2 -------GND--------GND--------20
+3 -------CS----------24--------24
+4 -------RESET-------12--------12
+5--------DC/RS-------18--------18
+6--------MOSI--------19--------19
+7--------SCK---------23--------23
+8--------LED--------3.3V-------N/A
+
+
+
+
+
+git clone https://github.com/birdtechstep/fbtft.git 
+
+cd fbtft
+
+1.8" ST7735:
+
+sudo modprobe fbtft_device name=sainsmart18 busnum=0 rotate=0 gpios=reset:$RESET,dc:$DC cs=0
+
+3.5" ILI9488:
+
+sudo modprobe fbtft_device custom name=fb_ili9488 busnum=0 rotate=0 gpios=reset:57,dc:58 cs=5
+
+1.5" SSD1351:
+
+sudo modprobe fbtft_device custom name=fb_ssd1351 busnum=0 rotate=0 gpios=reset:12,dc:18,cs:24
+
+
+
+
+list fbtft drivers:
+
+sudo modprobe fbtft_device name=list; dmesg | tail -30

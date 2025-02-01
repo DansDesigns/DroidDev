@@ -1,0 +1,6 @@
+
+
+sudo chmod 777 /dev/i2c-0
+sudo chmod 777 /sys/class/gpio/export
+sudo chmod 777 /sys/class/gpio/unexport
+sudo chmod 777 /sys/class/gpio/gpio10/direction

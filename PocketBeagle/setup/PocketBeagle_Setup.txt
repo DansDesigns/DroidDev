@@ -1,0 +1,4 @@
+Flash Debian image & Insert SD Card
+connect to PC & load disc, open START.HTM
+enable wifi access
+connect Putty

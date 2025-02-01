@@ -1,0 +1,11 @@
+Uninstall python-pyaudio with sudo apt-get purge --remove python-pyaudio if you have it (This is version 0.2.8)
+Download the latest version (19) of PortAudio.
+Untar and install PortAudio:
+tar zxvf pa_stable_v190700_20210406.tgz
+cd portaudio
+./configure
+make
+sudo make install
+Get the dependencies for pyaudio:
+sudo apt-get install portaudio19-dev python3-all-dev
+sudo pip install pyaudio

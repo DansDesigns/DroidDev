@@ -1,0 +1,16 @@
+wget https://github.com/tobykurien/rpi_lcars/archive/refs/tags/v1.1.zip
+?????????????????????????????????????
+
+working solution for nanopi neo:
+
+sudo apt-get install libsdl2-dev python3-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev libsmpeg-dev subversion libportmidi-dev ffmpeg libswscale-dev libavformat-dev libavcodec-dev libfreetype6-dev libsdl2-mixer-dev libsdl2-image-dev libsdl2-ttf-dev
+
+pip install pygame==2.5.2
+
+or
+
+python3 -m pip install pygame==2.5.2
+
+or
+
+pip install pygame --no-use-wheel

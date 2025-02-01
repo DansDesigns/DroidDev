@@ -1,0 +1,67 @@
+
+                if ("time" in query):
+                    output("It is currently " +
+                        datetime.datetime.now().strftime("%H:%M"))
+                    listening = False
+
+                elif ("date" in query):
+                    output("Today is " + str(datetime.datetime.now().day)
+                        + " " + str(datetime.datetime.now().month)
+                        + " " + str(datetime.datetime.now().year))
+                    listening = False
+
+                elif ("weather" in query):
+                    weather()
+                    listening = False
+
+                elif ("joke" in query):
+                    output(pyjokes.get_joke())
+                    listening = False
+
+                elif ("idea" in query):
+                    output("What would you like me to remember?")
+                    dataspeech = stream.read(8192, exception_on_overflow=False)
+                    speech = recognizer.Result().title()
+ 
+                    if recognizer.AcceptWaveform(dataspeech):
+                        # print("Recognized")
+                        print(speech)
+                        output("I will remember this for you: " + speech)
+                        with open("ideas.txt", "a", encoding="utf-8") as r:
+                            print(speech, file=r)
+
+                        if ("cancel" in speech or input()):
+                            recognizer.Reset()
+                            listening = False
+                        if ("end" in speech or input()):
+                            recognizer.Reset()
+                            listening = False
+
+
+                elif ("remind me" in query):
+                    ideas = open("ideas.txt", "r")
+                    output(f"You told me to remember these ideas:\n{ideas.read()}")
+                    output("That's all I have.")
+                    listening = False
+
+                elif ("how are you" in query):
+                    output(f"I'm good, my Cpu is running at 2.8GHz, with a load of {str(psutil.cpu_percent())}%, "
+                            f"My battery is currently at {str(battery.percent)}%, giving {str(int(battery.secsleft))} seconds of operation remaining.")
+                    listening = False
+
+                elif ("are you there" in query):
+                    output(f"Yes I'm here, I was just thinking about this joke, {str(pyjokes.get_joke())}")
+                    listening = False
+
+                elif ("your name" in query):
+                    output(f"My name is {SN} ")
+                    listening = False
+
+                elif ("who are you" in query):
+                    output(f"My name is {SN}, and I am an Artificial Intelligence programed by Dan's Droids for use in Robots.")
+                    listening = False
+
+                elif ("what can you do" in query):
+                    output(
+                        f"I am able to do many things, I can Play and Pause media, Search the web for you, take notes and compose emails, open youtube videos, and what ever else you program me to do.")
+                    listening = False

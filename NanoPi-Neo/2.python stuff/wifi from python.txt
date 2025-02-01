@@ -1,0 +1,87 @@
+
+
+
+
+https://pypi.org/project/wifimangement-linux/
+
+
+what is wifimangement_linux ?
+its an python module . Its use for network or wifi controlling tool for Linux/unix . That prove many function such as enable, disable and connect ..etc . Its give full acces in python to handle system wifi.
+
+Installation
+Open terminal
+
+sudo pip3 install wifimangement_linux
+Function
+Note:- Before use import moduls like below way :
+
+import wifimangement_linux as wifi 
+
+Disable Wifi
+to Disable(off) the wifi
+
+wifi.off()
+Enable Wifi
+to enable(on) the wifi
+
+wifi.on()
+Connect
+Connect the wifi to network(name as wifi-name or your wifi name ) if the password already there
+
+wifi.connect("wifi-name")
+connect the wifi to network(name as wifi-name with password)
+
+wifi.connect("wifi-name","wifi-password")
+Scan
+scan local wi-fi network
+
+ wifi.scan()
+list
+get list of scan network
+
+wifi.list()
+share
+share a connect wifi (information and password)
+
+wifi.share()
+share a connect wifi (information and password) with qr code
+
+wifi.share("qr")
+it return connect wifi password (pass=wifi.share("psk")) it store password in pass)
+
+wifi.share("psk")
+Hospot
+it create hostop (with name as hostop-name and password as password ) =>note:- to off hostop and turn on wifi use (wifi.on())
+
+wifi.hostop("hostop-name","password")
+Interface List
+it return list out all interface in pc
+
+wifi.interface_list()
+Interface Status
+it return interfac stutus in pc
+
+wifi.interface_status()
+Interface Config
+it return interfac configration in pc
+
+wifi.interface_config()
+it return interfac configration at certain interface in pc
+
+wifi.interface_config("interface")
+Gateway
+return gateway of router (its an ip address of router)
+
+wifi.gateway()
+Ip Address
+return ip addres of pc
+
+wifi.ip()
+Store
+its return wifi and they password in dictory type
+
+wifi.store()
+print table
+its print all saved wifi and password in nice table format
+
+wifi.printpsk()

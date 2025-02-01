@@ -1,0 +1,64 @@
+ NEW WAY:
+
+with no password, autologin and add to ~/.bashrc:
+
+sudo python3 /home/pi/pygame_test.py
+
+
+
+
+It will be better to run our application as a service inside the raspberry pi system.
+Here are the steps on how to make your application a service so that it can stop and start when OTA requires:
+Create a service file.
+
+sudo nano /etc/systemd/system/your_application.service
+
+eg.
+
+sudo nano /etc/systemd/system/ui.service
+
+2. Add the following lines to the service file:
+[Unit]
+Description=Your application service
+[Service]
+User=pi
+Type=simple
+ExecStartPre=/bin/sleep 2
+ExecStart=/home/pi/testvenv/bin/python3 pygame_test.py \
+ --interface spi \
+ --display ssd1351 \
+ --spi-bus-speed 4500000 \
+ --spi-device=0 \
+ --spi-port=1 \
+ --gpio OPi.GPIO \
+ --gpio-reset=12 \
+ --gpio-data-command=18 \
+ --gpio OPi.GPIO
+Restart=always
+[Install]
+WantedBy=multi-user.target
+
+#NOTE does not need all the bumpf at the end of python3 pygame_test.py....
+
+3. Save the service file and exit the editor.
+
+4. Enable the service.
+sudo systemctl enable ui.service
+
+5. Start the service.
+sudo systemctl start ui.service
+
+6. Check the status of the service.
+sudo systemctl status ui.service
+
+7. To stop the service, use the following command:
+sudo systemctl stop ui.service
+
+8. To restart the service, use the following command:
+sudo systemctl restart ui.service
+
+9. To disable the service, use the following command:
+sudo systemctl disable ui.service
+
+
+Once you have created the service file and enabled the service, your application will be started automatically when your Raspberry Pi boots up. You can stop and start the service using the commands above.

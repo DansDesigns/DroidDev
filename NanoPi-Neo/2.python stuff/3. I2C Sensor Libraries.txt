@@ -1,0 +1,17 @@
+
+pip3 install Adafruit-GPIO smbus2 pimoroni-bme280 
+sudo pip3 install Adafruit-GPIO smbus2 pimoroni-bme280 --break-system-packages
+
+
+MPR121:
+
+git clone https://github.com/adafruit/Adafruit_Python_MPR121.git
+
+
+VL53L0X:
+
+git clone https://github.com/johnbryanmoore/VL53L0X_rasp_python.git
+cd VL53L0X_rasp_python
+make
+
+

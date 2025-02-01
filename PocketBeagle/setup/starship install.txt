@@ -1,0 +1,9 @@
+
+curl -sS https://starship.rs/install.sh | sh
+
+sudo nano ~/.bashrc
+
+	@ EOF:
+	eval "$(starship init bash)"
+
+copy starship.toml to ~/.config

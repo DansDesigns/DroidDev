@@ -1,0 +1,7 @@
+
+Install:
+pip3 install HC-05-ConfigTool
+
+
+Run:
+python3 -m hc05config

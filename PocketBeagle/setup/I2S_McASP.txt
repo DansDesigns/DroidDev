@@ -1,0 +1,11 @@
+
+I2S PINS:	PocketBeagle.GPIO:
+MCLK	 	P1.29	
+WCLK		P1.33	
+BCLK		P1.36	 
+DIN		P2.32	
+DOUT		P2.30	
+RESET		P2.26	
+SCL		P1.28	 
+SDA		P1.26
+

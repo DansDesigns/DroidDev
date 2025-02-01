@@ -1,0 +1,23 @@
+
+# Install libraries:
+
+sudo apt-get install libsdl2-dev python3-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev libsmpeg-dev subversion libportmidi-dev ffmpeg libswscale-dev libavformat-dev libavcodec-dev libfreetype6-dev libsdl2-mixer-dev libsdl2-image-dev libsdl2-ttf-dev python3-pip psutil 
+
+
+# NO LONGER NEEDED... USE AUTO LOGIN AND SUDO PYTHON3 ...
+
+
+# create new Virtual environment (VENV):
+
+python3 -m venv testvenv
+
+#activate VENV as default:
+
+sudo nano ~/.bashrc
+
+add:
+
+alias venv="source /home/pi/testvenv/bin/activate"
+venv
+
+after Starship, before exit0

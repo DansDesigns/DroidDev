@@ -1,0 +1,11 @@
+
+Makes GPIO26 Hibernate button & GPIO03 Start Button - Can still use I2C
+Not essential for GPIO26 to be shutdown but is done and works
+
+
+sudo nano /boot/config.txt
+
+
+add at end of file:
+
+dtoverlay=gpio-shutdown,gpio_pin=26,active_low=1,gpio_pull=up

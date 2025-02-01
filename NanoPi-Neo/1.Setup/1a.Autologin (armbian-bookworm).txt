@@ -1,0 +1,18 @@
+
+
+
+sudo nano /lib/systemd/system/getty@tty1.service.d/20-autologin.conf
+
+Add:
+
+
+# /lib/systemd/system/getty@tty1.service.d/20-autologin.conf
+
+[Service]
+ExecStart=
+ExecStart=-/sbin/agetty --noclear -a pi %I $TERM
+
+
+If needed change 'pi' with another username
+Reboot.
+

@@ -1,0 +1,119 @@
+
+https://www.linkedin.com/pulse/ota-python-application-running-raspberry-pi-dhiraj-patra/
+
+OTA for Python application running in raspberry pi
+Dhiraj Patra
+Dhiraj Patra
+Solutions & Data Architect AI, ML, DS, IoT, Cloud | 32k+ connection
+154 articles 
+Follow
+May 11, 2023
+
+Open Immersive Reader
+Remote AI/Machine Learning application running on Raspberry Pi required to update whenever new files or models etc updated into the repo eg. GitHub
+We can use the Over The Air method to update them. You should have a Python application running maybe with Flask or using another MVC.
+To run a Python Flask application as a server on a Raspberry Pi, you can follow these steps:
+Install Flask using pip. You can install Flask by running the following command in your terminal:
+pip install flask
+
+Create a Flask application in a Python script. Here is an example Flask application that responds with “Hello, world!” to all requests:
+from flask import Flask
+app = Flask(__name__)
+@app.route(‘/’)
+def hello_world():
+return ‘Hello, world!’
+if __name__ == ‘__main__’:
+app.run(debug=True, host=’0.0.0.0')
+Save the script to a file, for example /home/pi/my-flask-app.py.
+Start the Flask application by running the Python script in your terminal:
+python /home/pi/my-flask-app.py
+
+This will start the Flask application and bind it to the default port 5000 on the local machine.
+Access the Flask application from a web browser by visiting http://localhost:5000/ or http://<your-raspberry-pi-ip>:5000/ from another device on the same network.
+You can find out many machine learning applications code which may help you to build your application, find here https://github.com/dhirajpatra/
+Now we need to think about how we will update our application on the fly means over the air remotely.
+It will be better to run our application as a service inside the raspberry pi system.
+Here are the steps on how to make your application a service so that it can stop and start when OTA requires:
+Create a service file.
+
+sudo nano /etc/systemd/system/your_application.service
+
+2. Add the following lines to the service file:
+[Unit]
+Description=Your application service
+[Service]
+Type=simple
+ExecStart=/path/to/your_application
+Restart=always
+[Install]
+WantedBy=multi-user.target
+3. Save the service file and exit the editor.
+4. Enable the service.
+sudo systemctl enable your_application.service
+
+5. Start the service.
+sudo systemctl start your_application.service
+
+6. Check the status of the service.
+sudo systemctl status your_application.service
+
+7. To stop the service, use the following command:
+sudo systemctl stop your_application.service
+
+8. To restart the service, use the following command:
+sudo systemctl restart your_application.service
+
+9. To disable the service, use the following command:
+sudo systemctl disable your_application.service
+
+10. To remove the service, use the following command:
+sudo systemctl remove your_application.service
+
+Once you have created the service file and enabled the service, your application will be started automatically when your Raspberry Pi boots up. You can stop and start the service using the commands above.
+To update your application remotely. Here are the steps on how to use OTA for your Python application running in Raspberry Pi and code is in GitHub:
+Install the necessary dependencies.
+
+sudo apt-get install git rsync
+
+2. Clone your GitHub repository to your Raspberry Pi.
+git clone https://github.com/your_username/your_repository.git
+
+3. Create a new directory for your OTA updates.
+mkdir ota_updates
+
+4. Copy the latest version of your application to the ota_updates directory.
+rsync -a ./ota_updates/
+
+5. Create a script that will check for updates and download them if necessary.
+#!/bin/bash
+# Check for updates
+cd ota_updates
+git fetch
+LOCAL=$(git rev-parse HEAD)
+REMOTE=$(git rev-parse @{u})
+if [ $LOCAL != $REMOTE ]; then
+echo “Repository is outdated. Updating…”
+# git pull
+# Download updates
+git checkout master
+# Replace the current application with the updated version
+rsync -a ./..
+# Restart the application
+sudo service your_application restart
+else
+echo “Repository is up to date.”
+fi
+6. Set the script to run automatically.
+crontab -e
+
+Add the following line to the crontab file:
+* * * * * /path/to/script
+
+7. Test the script.
+bash /path/to/script
+
+If the script runs successfully, you should see the latest version of your application running on your Raspberry Pi.
+Here are some additional tips for using OTA updates:
+Use a version control system (such as Git) to manage your code. This will make it easy to track changes and roll back to a previous version if necessary.
+Use a staging environment to test updates before deploying them to production. This will help you catch any potential problems before they affect your users.
+Use a secure connection when downloading updates. This will help protect your Raspberry Pi from malware and other security threats.

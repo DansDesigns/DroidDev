@@ -1,0 +1,24 @@
+(for ASUS USB-N10)
+
+wlx002618e11b02
+
+su root
+
+nmcli dev
+
+* Note: if the status of a device is "unmanaged" it means that device cannot be accessed by 
+  NetworkManager. To make it accessed you need to clear the settings under:  
+  "/etc/network/interfaces" and reboot your system, or add the interface name (above):
+
+	sudo nano /etc/network/interfaces
+
+nmcli r wifi on
+
+nmcli dev wifi
+
+nmcli dev wifi connect "Workshop-Wifi" password "Tintin10" ifname wlx002618e11b02
+
+- Device 'wlx002618e11b02' successfully activated with 'ee548e84-6644-4c68-b37a-cc4cb0c3eda2'.
+
+
+exit

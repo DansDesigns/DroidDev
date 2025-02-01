@@ -1,0 +1,13 @@
+192.168.7.2 - default USB address for Putty
+
+Debian Buster:
+
+sudo connmanctl
+<Default-PASSWORD> temppwd
+scan wifi
+...
+services
+agent on
+connect <WIFI LONG NAME-from Services report>
+Passphrase: <WIFI PASSWORD>
+quit

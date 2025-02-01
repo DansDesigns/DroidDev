@@ -1,0 +1,47 @@
+https://github.com/beagleboard/pocketbeagle/wiki/Peripherals
+
+ls /sys/devices/platform/ocp/
+
+sudo chmod 777 /dev/tty2
+sudo chmod 777 /dev/tty4
+
+
+# UART PINS:
+
+#uart2(/dev/tty02):
+config-pin P1_08 uart
+config-pin P1_10 uart
+
+#uart1 (/dev/tty04):
+config-pin P2_05 uart
+config-pin P2_07 uart
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# PWM PINS:
+
+#pwm1 (PWM 1-A)
+config-pin P2_01 pwm
+
+#pwm2 (PWM 2-A)
+config-pin P2_03 pwm
+
+#pwm3 (PWM 0-A)
+config-pin P1_36 pwm
+
+#pwm4 (PWM 0-B)
+config-pin P1_33 pwm
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# I2C PINS:
+
+#i2c1 (P2_09 SCL, P2_11 SDA)
+config_pin P2_09 i2c
+config_pin P2_11 i2c
+
+#i2c2 (P1_28 SCL, P1_26 SDA)
+config_pin P1_28 i2c
+config_pin P1_26 i2c
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~

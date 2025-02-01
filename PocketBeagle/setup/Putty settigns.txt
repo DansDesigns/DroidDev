@@ -1,0 +1,5 @@
+PocketBeagle PuTTY Settings
+
+SSH: 192.168.7.2
+
+Serial: COM52 9600 baud

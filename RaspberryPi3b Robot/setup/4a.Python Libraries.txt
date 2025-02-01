@@ -1,0 +1,62 @@
+# enable SWAP:
+
+1. Temporarily Stop Swap:
+
+sudo dphys-swapfile swapoff
+
+2. Modify the size of the swap:
+
+sudo nano /etc/dphys-swapfile
+
+and modify the variable CONF_SWAPSIZE to 1024:
+
+CONF_SWAPSIZE=1024
+
+
+3. Initialize Swap File:
+
+sudo dphys-swapfile setup
+
+4. Start Swap:
+
+sudo dphys-swapfile swapon
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#install linux programs:
+
+sudo apt install python3-venv espeak portaudio19-dev libespeak-dev python-all-dev vlc build-essential python3-dev tmux
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# create new Virtual environment (VENV):
+
+python3 -m venv AI-linux
+
+#activate VENV as default:
+
+sudo nano ~/.bashrc
+add:
+
+alias venv="source /home/dan/AI-linux/bin/activate"
+venv
+
+after Starship, before exit0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# update pip and install Python Packages:
+
+pip3 install --upgrade pip
+
+pip3 install wheel setuptools psutil pyjokes pyttsx3 requests python-vlc wikipedia vosk asyncio spacy ttastromech adafruit-circuitpython-pca9685 pyserial HC-05-ConfigTool 
+
+# chatterbot is installed from here:
+
+pip install git+https://github.com/ShoneGK/ChatterPy
+
+# install additional dependencies:
+
+pip3 install opencv-python==4.3.0.38 (--no-cache-dir)(no wheel building needed)
+
+sudo apt-get install libatlas-base-dev libhdf5-dev libhdf5-serial-dev libatlas-base-dev libjasper-dev libqtgui4 libqt4-test libilmbase-dev libopenexr-dev libgstreamer1.0-dev libavcodec-dev libavformat-dev libswscale-dev libwebp-dev
+

@@ -1,0 +1,47 @@
+R-Pi
+Panel--- Panel------GPIO-------RPI pin
+Pin------Label------Pin nb-----number
+1--------VCC-------3.3V--------1
+2 -------GND-------GND-------9
+3 -------CS-----------8---------24
+4 -------RESET-------7---------26
+5--------DC/RS------25--------22
+6--------MOSI------ 10--------19
+7--------SCK--------11--- -----23
+8--------LED--------3.3V-------18
+
+    # Pocket SPI 0
+    config-pin P2.04 gpio   # D/C 40
+    config-pin P2.06 gpio   # RESET 46
+    config-pin P1.12 spi    # spi 0_d1 MOSI0
+    config-pin P1.10 spi    # spi 0_d0 MISO0
+    config-pin P1.08 spi_sclk # spi 0_sclk0
+    config-pin P1.06 spi_cs # spi 0_cs0
+    
+
+
+sudo apt-get install cmake
+cd ~
+git clone https://github.com/juj/fbcp-ili9341.git
+cd fbcp-ili9341
+mkdir build && cd build
+
+cmake -DILI9488=ON -DGPIO_TFT_DATA_CONTROL=58 -DGPIO_TFT_RESET_PIN=57 -DSPI_BUS_CLOCK_DIVISOR=20 -DBACKLIGHT_CONTROL=OFF -DARMV8A=ON -DSTATISTICS=0 -DUSE_DMA-TRANSFER=ON ..
+
+make -j
+
+sudo ./fbcp-ili9341
+
+to finalize:
+sudo nano /etc/rc.local
+
+add:
+$ sudo /home/pi/fbcp-ili9341/build/fbcp-ili9341 &
+
+before:
+exit 0
+
+CTRL+O = save
+CTRL+X = exit
+
+sudo reboot now

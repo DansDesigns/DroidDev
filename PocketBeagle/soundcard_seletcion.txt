@@ -1,0 +1,14 @@
+Find your desired card with:
+
+cat /proc/asound/cards
+
+and then 
+
+sudo nano /etc/asound.conf
+
+with the following entries:
+
+defaults.pcm.card 1
+defaults.ctl.card 1
+
+Replace 1 with number of your card determined above. Source: https://www.alsa-project.org/wiki/Setting_the_default_device

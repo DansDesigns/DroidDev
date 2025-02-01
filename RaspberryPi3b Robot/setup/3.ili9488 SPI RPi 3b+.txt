@@ -1,0 +1,73 @@
+Panel--- Panel------GPIO-------RPI pin
+Pin------Label------Pin nb-----number
+1--------VCC-------3.3V--------1
+2 -------GND-------GND-------9
+3 -------CS-----------8---------24
+4 -------RESET-------7---------26
+5--------DC/RS------25--------22
+6--------MOSI------ 10--------19
+7--------SCK--------11--- -----23
+8--------LED--------3.3V-------18
+
+!_DOES NOT WORK ON X64_!
+
+sudo apt-get install cmake git
+cd ~
+git clone https://github.com/juj/fbcp-ili9341.git
+cd fbcp-ili9341
+mkdir build && cd build
+
+cmake -DILI9488=ON -DGPIO_TFT_DATA_CONTROL=25 -DGPIO_TFT_RESET_PIN=7 -DSPI_BUS_CLOCK_DIVISOR=10 -DBACKLIGHT_CONTROL=OFF -DARMV8A=ON -DSTATISTICS=0 -DUSE_DMA-TRANSFER=ON ..
+
+
+#TEST SETTINGS:
+cd fbcp-ili9341
+rm -r build && mkdir build && cd build
+cmake -DILI9488=ON -DGPIO_TFT_DATA_CONTROL=25 -DGPIO_TFT_RESET_PIN=7 -DSPI_BUS_CLOCK_DIVISOR=8 -DBACKLIGHT_CONTROL=OFF -DARMV8A=ON -DSTATISTICS=1 -DUSE_DMA-TRANSFER=ON ..
+
+make -j
+
+sudo ./fbcp-ili9341
+
+
+to finalize (new method below):
+# use this method, NOT "New" method:
+
+
+sudo nano /etc/rc.local
+
+add:
+sudo /home/pi/fbcp-ili9341/build/fbcp-ili9341 &
+
+before:
+exit 0
+
+CTRL+O = save
+CTRL+X = exit
+
+sudo reboot now
+
+~~~~~~~~~~~~ NEW METHOD: ~~~~~~~~~~~~~~~
+
+# doesnt work 2023...
+sudo nano /etc/systemd/system/fbcp.service
+
+	Enter:
+
+ [Unit]
+ Description=framebuffer copy to spi screen
+ Before=basic.target
+ After=local-fs.target
+ DefaultDependencies=yes
+
+ [Service]
+ Type=simple
+ ExecStart=/home/pi/fbcp-ili9341/build/fbcp-ili9341
+ [Install]
+ WantedBy=basic.target
+
+Save + Exit
+
+sudo systemctl daemon-reload
+sudo systemctl enable fbcp
+sudo reboot now

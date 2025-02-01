@@ -1,0 +1,9 @@
+# This is for the PocketBeagle SPI 0 LCD/TFT Screens using FBTFT Library
+
+	Pin:		Screen:
+     P2.04 gpio   	# D/C 58
+     P2.06 gpio   	# RESET 57
+     P1.12 spi    	# spi 0 d1 MOSI
+     P1.10 spi    	# spi 0 d0 MISO
+     P1.08 spi_sclk 	# spi 0 sclk
+     P1.06 spi_cs 	# spi 0 cs

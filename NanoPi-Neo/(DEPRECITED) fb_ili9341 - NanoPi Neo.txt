@@ -1,0 +1,50 @@
+
+REPLACED BY DTOVERLAY
+
+
+
+
+Panel--- Panel------GPIO-------NanoPI pin
+Pin------Label------Pin nb-----number
+1--------VCC--------3.3V-------17
+2 -------GND--------GND--------20
+3 -------CS----------24--------24
+4 -------RESET-------12--------12
+5--------DC/RS-------18--------18
+6--------MOSI--------19--------19
+7--------SCK---------23--------23
+8--------LED--------3.3V-------N/A
+
+
+
+sudo apt-get install cmake libraspberrypi-dev
+cd ~
+git clone https://github.com/juj/fbcp-ili9341.git
+cd fbcp-ili9341
+mkdir build && cd build
+
+ili9488 3.5" RPi LCD:
+
+cmake -DILI9488=ON -DGPIO_TFT_DATA_CONTROL=25 -DGPIO_TFT_RESET_PIN=7 -DSPI_BUS_CLOCK_DIVISOR=20 -DBACKLIGHT_CONTROL=OFF -DARMV8A=ON -DSTATISTICS=0 -DUSE_DMA-TRANSFER=ON ..
+
+1.5" 128x128 SSD1351 NanoPi Neo:
+
+cmake -DSSD1351=ON -DGPIO_TFT_DATA_CONTROL=19 -DGPIO_TFT_RESET_PIN=12 -DSPI_BUS_CLOCK_DIVISOR=20 -DBACKLIGHT_CONTROL=OFF -DSTATISTICS=0 ..
+
+make -j
+
+sudo ./fbcp-ili9341
+
+to finalize:
+sudo nano /etc/rc.local
+
+add:
+$ sudo /home/pi/fbcp-ili9341/build/fbcp-ili9341 &
+
+before:
+exit 0
+
+CTRL+O = save
+CTRL+X = exit
+
+sudo reboot now

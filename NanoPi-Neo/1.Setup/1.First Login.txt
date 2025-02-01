@@ -1,0 +1,14 @@
+
+Armbian 23 6.1.63
+
+username: root
+password: 1234
+
+setup NO root password to give user full access..
+
+set username: pi
+set password: 7932
+
+# to remove password:
+
+sudo passwd -d pi
